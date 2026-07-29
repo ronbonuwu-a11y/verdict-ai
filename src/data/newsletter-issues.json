@@ -1,0 +1,18 @@
+[
+  {
+    "id": "nl-1",
+    "slug": "actually-good-june-2026",
+    "title": "Actually Good: June 2026",
+    "summary": "Three AI tools that genuinely impressed us this month — FocusFlow, NoteWriter Pro, and BrandBot AI.",
+    "publishedAt": "2026-06-20",
+    "reviewSlugs": ["focusflow", "notewriter-pro", "brandbot-ai"]
+  },
+  {
+    "id": "nl-2",
+    "slug": "ai-slop-watch-may-2026",
+    "title": "AI Slop Watch: May 2026",
+    "summary": "The worst offenders we tested this month, plus one tool that barely scraped by.",
+    "publishedAt": "2026-05-28",
+    "reviewSlugs": ["writesmart-ai", "clipgenius", "pixelforge"]
+  }
+]

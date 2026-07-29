@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+}
+
+html { scroll-behavior: smooth; }
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection { background: #ef4444; color: #fff; }
+
+.signal-grid {
+  background-image: linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.signal-console { --signal: #ef4444; }
+.signal-amber { --signal: #f59e0b; }
+.signal-emerald { --signal: #34d399; }
+.signal-console .signal-orb { background: var(--signal); filter: blur(78px); opacity: .23; }
+.signal-console .scanner-line { color: var(--signal); animation: scan 3.8s ease-in-out infinite; }
+.signal-console:has(button[aria-selected="true"]) { box-shadow: inset 0 1px 0 rgb(255 255 255 / .04); }
+
+@keyframes scan { 0%, 100% { transform: translateY(2.5rem); opacity: .1; } 50% { transform: translateY(17rem); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,156 @@
+[
+  {
+    "id": "1",
+    "slug": "writesmart-ai",
+    "toolName": "WriteSmart AI",
+    "category": "Writing Tools",
+    "verdict": "FAILS",
+    "score": 2.4,
+    "claim": "Writes indistinguishable human copy in any tone",
+    "summary": "Generic filler, repeated phrases, and obvious AI tells on every test prompt.",
+    "methodology": "We ran five real-world writing tasks: product description, cold email, blog intro, social caption, and apology letter. Each output was checked for repetition, factual accuracy, and whether it matched the requested tone.",
+    "results": [
+      "Product description reused the same adjective three times in one paragraph",
+      "Cold email opened with 'I hope this email finds you well' and invented company details",
+      "Blog intro was readable but added unsourced statistics",
+      "Social caption ignored the brand voice we specified",
+      "Apology letter sounded robotic and over-apologetic"
+    ],
+    "testedAt": "2026-05-12",
+    "instagramUrl": "https://instagram.com",
+    "extendedBreakdown": "We tested WriteSmart across five distinct writing scenarios over three days. The tool consistently defaulted to the same sentence structures regardless of tone instructions. When asked for 'casual startup voice,' it still produced corporate filler. Factual hallucinations appeared in 3 of 5 outputs, including invented statistics and fake company names in cold emails."
+  },
+  {
+    "id": "2",
+    "slug": "pixelforge",
+    "toolName": "PixelForge",
+    "category": "Image Tools",
+    "verdict": "QUALIFIED PASS",
+    "score": 6.1,
+    "claim": "Studio-quality product photos from a single phone snap",
+    "summary": "Background removal and lighting fixes are solid; text and fine details still break.",
+    "methodology": "We photographed five everyday products with a phone, uploaded each to PixelForge, and compared outputs against the marketing examples on their homepage.",
+    "results": [
+      "Background replacement worked well on simple products",
+      "Shadows looked natural on flat surfaces",
+      "Text on packaging warped or became unreadable",
+      "Reflective surfaces produced artifacts",
+      "Batch processing was fast and easy to use"
+    ],
+    "testedAt": "2026-05-18",
+    "instagramUrl": "https://instagram.com",
+    "extendedBreakdown": "PixelForge delivers on its core promise for simple product shots but falls short on anything with text or reflective surfaces. We tested against their homepage examples — our results matched theirs on 2 of 5 products. For e-commerce sellers with clean, text-free packaging, this is usable. For anything else, expect manual touch-ups."
+  },
+  {
+    "id": "3",
+    "slug": "focusflow",
+    "toolName": "FocusFlow",
+    "category": "Productivity",
+    "verdict": "PASSES",
+    "score": 8.7,
+    "claim": "AI scheduling that actually respects your deep work blocks",
+    "summary": "Consistently protected focus time and made reasonable rescheduling suggestions.",
+    "methodology": "We connected FocusFlow to a calendar with recurring deep work blocks, added ten meetings over two weeks, and tracked whether the tool preserved focus time without creating conflicts.",
+    "results": [
+      "Deep work blocks were never auto-scheduled over",
+      "Meeting suggestions avoided back-to-back overload",
+      "Rescheduling notifications were clear and actionable",
+      "One edge case: all-day events confused the parser",
+      "Setup took under five minutes"
+    ],
+    "testedAt": "2026-05-22",
+    "instagramUrl": "https://instagram.com",
+    "affiliateUrl": "https://focusflow.example.com/?ref=verdictai",
+    "featuredInNewsletter": true,
+    "extendedBreakdown": "FocusFlow was the standout in our productivity category testing. Over 14 days with 10 injected meeting requests, it never once scheduled over a protected deep work block. The rescheduling suggestions were context-aware — it offered afternoon slots when morning was blocked, not just the next open slot. The all-day event edge case is minor and likely fixable."
+  },
+  {
+    "id": "4",
+    "slug": "clipgenius",
+    "toolName": "ClipGenius",
+    "category": "Video Tools",
+    "verdict": "FAILS",
+    "score": 2.8,
+    "claim": "Turn any long video into viral shorts automatically",
+    "summary": "Clips were technically fine but missed every moment that would actually perform.",
+    "methodology": "We uploaded three podcast episodes (30–45 min each) and compared ClipGenius auto-clips against manually selected highlights from the same episodes.",
+    "results": [
+      "Clips cut mid-sentence in 8 of 12 outputs",
+      "Hook moments were consistently missed",
+      "Captions had frequent spelling errors on names",
+      "Aspect ratio and export quality were acceptable",
+      "None of the auto-clips matched our manual top picks"
+    ],
+    "testedAt": "2026-06-01",
+    "instagramUrl": "https://instagram.com",
+    "isSponsored": false,
+    "extendedBreakdown": "We ran ClipGenius against three real podcast episodes where we already knew the viral moments. The tool's AI selected technically clean clips that completely missed the emotional peaks, hot takes, and quotable lines that make shorts perform. Caption accuracy on proper nouns was poor — guest names were wrong in 60% of clips."
+  },
+  {
+    "id": "5",
+    "slug": "notewriter-pro",
+    "toolName": "NoteWriter Pro",
+    "category": "Writing Tools",
+    "verdict": "PASSES",
+    "score": 8.6,
+    "claim": "Meeting notes that capture decisions, not just summaries",
+    "summary": "Accurately pulled action items and decisions from messy real meetings.",
+    "methodology": "We recorded four team meetings (planning, standup, client call, retrospective) and compared NoteWriter Pro outputs to human-taken notes.",
+    "results": [
+      "Action items matched human notes in 3 of 4 meetings",
+      "Decision points were clearly labeled",
+      "Speaker attribution was mostly correct",
+      "One standup had minor name confusion",
+      "Export to Notion worked on first try"
+    ],
+    "testedAt": "2026-06-08",
+    "instagramUrl": "https://instagram.com",
+    "affiliateUrl": "https://notewriter.example.com/?ref=verdictai",
+    "featuredInNewsletter": true,
+    "extendedBreakdown": "NoteWriter Pro excelled at the thing most AI note tools miss: decisions. Instead of summarizing what was discussed, it flagged 'Decision: go with Option B' and 'Action: Sarah to send proposal by Friday.' Speaker attribution worked in 3 of 4 meetings — the standup confusion was likely due to overlapping speech. Notion export was seamless."
+  },
+  {
+    "id": "6",
+    "slug": "brandbot-ai",
+    "toolName": "BrandBot AI",
+    "category": "Writing Tools",
+    "verdict": "PASSES",
+    "score": 8.8,
+    "claim": "Generate on-brand social content for any platform",
+    "summary": "Genuinely impressed — maintained brand voice across platforms without generic AI filler.",
+    "methodology": "We uploaded a brand style guide and generated 20 pieces of content across Instagram, LinkedIn, and Twitter. Each was evaluated for voice consistency, platform appropriateness, and originality.",
+    "results": [
+      "Brand voice remained consistent across all 20 outputs",
+      "Platform-specific formatting was correct (character limits, hashtags)",
+      "No generic AI phrases detected in 18 of 20 outputs",
+      "Two LinkedIn posts were slightly too formal for the brand",
+      "Batch generation saved significant time vs. manual writing"
+    ],
+    "testedAt": "2026-06-15",
+    "instagramUrl": "https://instagram.com",
+    "affiliateUrl": "https://brandbot.example.com/?ref=verdictai",
+    "featuredInNewsletter": true,
+    "extendedBreakdown": "BrandBot AI is our pick for the 'Actually Good' category this month. After feeding it a 2-page brand guide, it produced content that genuinely sounded like the brand — not like AI pretending to be the brand. The platform-specific formatting alone saves hours. Two LinkedIn posts skewed formal, but that's a minor tweak, not a fundamental failure."
+  },
+  {
+    "id": "research-jasper", "slug": "jasper-ai-research-brief", "toolName": "Jasper", "category": "Writing Tools", "verdict": "MIXED", "claim": "Create high-volume marketing content that stays on-brand at scale", "summary": "Brand Voice and campaign workflows look credible, but the premium price and reports of generic drafts make the value case depend on human editing.", "methodology": "Test a 2-page brand guide across five campaign assets. Score voice fidelity, factuality, edit time, repeatability, and value against a general-purpose model plus the same style guide.", "results": ["Good: 4 of 5 assets preserve brand rules without invented claims", "Bad: polished but interchangeable copy or heavy rewriting", "Receipt: raw drafts, edit-time recording, and blind voice ranking", "Check every plan limit and cancellation step before purchase"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Jasper sells Brand Voice, knowledge assets, agents, and collaboration. Its official pricing lists Pro at $69 monthly or $59 monthly when billed yearly, with a 7-day trial; Business is custom. The claim to test is not whether it writes, but whether it stays on-brand at scale. Third-party commentary credits brand controls while flagging generic output and billing/value complaints.", "researchSources": [{"label":"Jasper plans and pricing","url":"https://www.jasper.ai/pricing"},{"label":"Jasper review and billing roundup","url":"https://startupowl.com/reviews/jasper"},{"label":"Jasper BBB complaints","url":"https://www.bbb.org/us/tx/austin/profile/social-media-marketing/jasper-ai-0825-1000214153/complaints"}]
+  },
+  {
+    "id": "research-copy-ai", "slug": "copy-ai-research-brief", "toolName": "Copy.ai", "category": "Writing Tools", "verdict": "MIXED", "claim": "Unify sales, marketing, and operations with automated GTM workflows", "summary": "It has moved beyond text generation into workflow automation, but its biggest outcome claims need integration and credit-consumption testing—not a polished demo.", "methodology": "Build lead-research, outreach, and inbound-follow-up workflows. Run 25 realistic records; track accuracy, personalization, failure recovery, review time, integration reliability, and credits per useful outcome.", "results": ["Good: accurate workflows with less cleanup", "Bad: generic outreach, invented facts, brittle integrations, or costly credit burn", "Receipt: workflow logs, CRM before/after states, credit meter, and time comparison", "Compare against a general LLM plus simple automation"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Copy.ai positions itself as a GTM AI platform with workflow automation for sales and marketing. It advertises a free tier and credit-based plans. Claims about eliminating GTM bloat and multiplying top performers are broad and need measurable evidence. Review roundups repeatedly mention credit clarity, price, and support as areas to challenge.", "researchSources": [{"label":"Copy.ai GTM AI overview","url":"https://www.copy.ai/gtm-ai"},{"label":"Copy.ai pricing explainer","url":"https://www.copy.ai/blog/copy-ai-pricing"},{"label":"Copy.ai Product Hunt reviews","url":"https://www.producthunt.com/products/copy-ai/reviews"},{"label":"Copy.ai Trustpilot reviews","url":"https://www.trustpilot.com/review/copy.ai"}]
+  },
+  {
+    "id": "research-writer", "slug": "writer-research-brief", "toolName": "Writer", "category": "Productivity", "verdict": "MIXED", "claim": "Scale agentic AI across an enterprise with governance, compliance, and company knowledge", "summary": "This is a serious enterprise stack, but the real test is whether agents stay grounded and governed when connected to live company systems.", "methodology": "Connect a sanitized knowledge base, create a policy-bound agent, then test factual queries and multi-step playbooks for grounding, permissions, auditability, and recovery from ambiguity.", "results": ["Good: cites supplied knowledge, respects rules, and leaves an auditable trail", "Bad: confident inventions, weak access controls, or automation needing rescue", "Receipt: prompt recordings, grounding checks, audit logs, and permission tests", "Ask for data/actions outside stated authority"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Writer offers a 14-day, no-card trial for up to five users and an Enterprise tier with governance, orchestration, connectors, and auditability. It says it does not train LLMs on customer data and promotes enterprise compliance controls. These are consequential claims that cannot be verified from marketing alone. Credits remain part of the enterprise model.", "researchSources": [{"label":"Writer plans and pricing","url":"https://writer.com/plans/"},{"label":"Writer product overview","url":"https://support.writer.com/article/58-what-is-writer"},{"label":"Writer credit model","url":"https://support.writer.com/article/322-credits"},{"label":"Writer G2 pricing","url":"https://www.g2.com/products/writer/pricing"}]
+  },
+  {
+    "id": "research-grammarly", "slug": "grammarly-research-brief", "toolName": "Grammarly", "category": "Writing Tools", "verdict": "MIXED", "claim": "Improve writing anywhere, now with AI-powered drafting and rewriting", "summary": "The core proofreading utility is established, but recent user feedback suggests its AI expansion can add clutter, miss basic errors, and push unwanted rewrites.", "methodology": "Test 50 seeded grammar/style errors across browser, Google Docs, Word, and email. Separately test rewrite quality and voice preservation. Compare false positives, missed errors, latency, and extension reliability with LanguageTool.", "results": ["Good: catches seeded errors consistently and makes rewrites optional", "Bad: core checking fails, extension breaks, or rewrites flatten voice", "Receipt: identical-document recordings and error scorecard", "Document generative-AI controls and sample-text handling"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Grammarly has free and paid plans and has broadened from grammar checking into generative AI and collaboration within the Superhuman suite. Recent Reddit feedback includes complaints about AI upsells, missed errors, interface changes, and inconsistent behavior; that is anecdotal, not a survey. The recently removed Expert Review feature also makes product direction a relevant review angle.", "researchSources": [{"label":"Grammarly plans","url":"https://www.grammarly.com/plans"},{"label":"Grammarly Pro support details","url":"https://support.grammarly.com/hc/en-us/articles/33347704601613-Updating-the-Grammarly-Premium-plan-to-the-Grammarly-Pro-plan"},{"label":"Recent Grammarly user discussion","url":"https://www.reddit.com/r/Grammarly/comments/1taq3md/i_finally_unsubscribed_to_grammarly/"},{"label":"Reporting on discontinued Expert Review","url":"https://www.techradar.com/ai-platforms-assistants/the-feature-was-not-a-good-feature-grammarly-ceo-admits-experts-review-didnt-work-but-you-may-not-like-what-replaces-it"}]
+  },
+  {
+    "id": "research-quillbot", "slug": "quillbot-research-brief", "toolName": "QuillBot", "category": "Writing Tools", "verdict": "BARELY PASSES", "claim": "Paraphrase and improve writing quickly without losing meaning", "summary": "The free paraphrasing utility appears useful for small rewrites, but meaning drift, generic phrasing, and subscription friction are what to pressure-test.", "methodology": "Paraphrase 30 academic, technical, legal, and casual passages. Score meaning preservation, citation integrity, readability, voice, and synonym-swapping. Test free versus Premium limits and cancellation/refund flow.", "results": ["Good: preserves facts, qualifiers, citations, and audience tone", "Bad: changes meaning or creates clumsy synonym swaps", "Receipt: tracked diffs, blind expert ratings, and free-tier limit recording", "Capture total cost and renewal disclosure before checkout"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: QuillBot provides a free tier alongside Premium and supports paraphrasing plus related writing tools. Its actual value is narrow: quick rewording and light polishing, not expert authorship. Third-party feedback points to a useful free tier, while complaint sources raise annual-billing and refund questions. No independent evidence here proves reliable meaning preservation in high-stakes writing.", "researchSources": [{"label":"QuillBot pricing and Premium help","url":"https://help.quillbot.com/hc/en-us/sections/360011720453-Premium-Pricing"},{"label":"QuillBot pricing/user-feedback roundup","url":"https://essaygenius.ai/reviews/quillbot-pricing"},{"label":"QuillBot BBB complaints","url":"https://www.bbb.org/us/il/chicago/profile/proofreading/quillbot-inc-0654-1000042869/complaints?page=2"}]
+  },
+  {
+    "id": "research-surfer", "slug": "surfer-research-brief", "toolName": "Surfer", "category": "Productivity", "verdict": "MIXED", "claim": "Optimize content for Google and AI search visibility with data-driven guidance", "summary": "Its editor and search analysis may accelerate an SEO workflow, but a higher content score is not proof of rankings—and users warn against robotic, over-optimized copy.", "methodology": "Optimize comparable existing pages with Surfer, a manual SERP brief, and no optimization. Blind-rate quality; track score changes, edit time, indexation, impressions, clicks, and rankings for 8–12 weeks.", "results": ["Good: clearer pages with better performance and no quality regression", "Bad: score chasing produces SEO soup or no measurable lift", "Receipt: Search Console baseline, SERP snapshots, revision diffs, score-versus-quality comparison", "Compare per-document cost against NeuronWriter or Frase"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Surfer offers a Content Editor, SERP/content analysis, and AI-search visibility features. Reported public pricing begins around $59 monthly, with higher tiers for more documents and prompt tracking; it uses a money-back guarantee rather than a traditional trial. Reviews praise editor workflow but user discussions challenge price and warn score-led writing can become formulaic. Test with live search data, not a one-session demo.", "researchSources": [{"label":"Surfer review and pricing","url":"https://www.techradar.com/pro/surferseo-review"},{"label":"Surfer G2 reviews","url":"https://www.g2.com/products/surfer-surfer/reviews"},{"label":"User discussion on price and SEO-soup risk","url":"https://www.reddit.com/r/WebsiteSEO/comments/1qphjaj/surfer_seo_worth_paying_for_or_better_to_just/"}]
+  },
+  {
+    "id": "research-clearscope", "slug": "clearscope-research-brief", "toolName": "Clearscope", "category": "Productivity", "verdict": "MIXED", "claim": "Give content teams recommendations that improve performance across Google and AI-driven discovery", "summary": "It has a focused content-optimization proposition and transparent pricing, but its $129 starting point must prove material value beyond cheaper SEO editors.", "methodology": "Run a content-refresh cohort through Clearscope, Surfer, and a manual editorial brief. Measure topic coverage, editing time, readability, tracked-prompt mentions, organic outcomes, and cost per improved page.", "results": ["Good: actionable guidance, natural content, and a measurable performance lift", "Bad: expensive guidance duplicates cheaper tools or harms editorial quality", "Receipt: recommendations, prompt trends, before/after pages, and cost-per-page sheet", "Test Google Docs/WordPress handoff on a real team workflow"], "testedAt": "2026-07-29", "reviewStage": "RESEARCH BRIEF — HANDS-ON TEST PENDING", "extendedBreakdown": "Confirmed: Clearscope sells content optimization and AI-search visibility tracking, including prompt tracking across ChatGPT and Gemini. Essentials is $129/month with a 14-day free trial; Business is $399/month and Enterprise is custom. It differentiates on content-team workflows, unlimited users, and integrations. Coverage regards recommendations and workflow positively but identifies price as a poor fit for many freelancers and small teams. Ranking impact remains unverified.", "researchSources": [{"label":"Clearscope plans and pricing","url":"https://www.clearscope.io/pricing"},{"label":"Clearscope product review","url":"https://www.techradar.com/pro/clearscope-review"},{"label":"Clearscope credits explanation","url":"https://www.clearscope.io/support/how-do-clearscope-credits-work"}]
+  }
+]
