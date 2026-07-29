@@ -36,6 +36,7 @@ yarn-error.log*
 # Local account records and server-side session store (contains PII and password hashes)
 /src/data/users.json
 /src/data/sessions.json
+/src/data/comments.json
 
 # vercel
 .vercel

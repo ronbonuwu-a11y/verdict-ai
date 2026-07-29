@@ -28,6 +28,11 @@ export const credentialsSchema = z.object({
   website: z.string().max(0).optional(),
 }).strict();
 
+export const commentSchema = z.object({
+  body: z.string().trim().min(20, "Comments must be at least 20 characters.").max(1000, "Comments must be 1,000 characters or fewer."),
+  website: z.string().max(0).optional(),
+}).strict();
+
 export type SubscribeInput = z.infer<typeof subscribeSchema>;
 export type NominationInput = z.infer<typeof nominationSchema>;
 export type CredentialsInput = z.infer<typeof credentialsSchema>;
