@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "How we test",
-  description: "The repeatable methodology behind every Verdict AI review.",
+  description: "The repeatable methodology behind every Rate That AI review.",
 };
 
 const steps = [

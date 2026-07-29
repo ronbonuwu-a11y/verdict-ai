@@ -22,7 +22,7 @@ const chapters = [
     number: "03",
     label: "The upside",
     title: "A pass should feel earned.",
-    body: "Verdict AI is not a dunk account. We want genuinely useful products to be easier to find, and a strong result to mean more than a shiny launch video.",
+    body: "Rate That AI is not a dunk account. We want genuinely useful products to be easier to find, and a strong result to mean more than a shiny launch video.",
     metric: "DISCOVERY / FOR THE GOOD STUFF",
   },
   {
@@ -77,7 +77,7 @@ export function ScrollFieldGuide() {
   }, []);
 
   return (
-    <section className="mb-20 border-y border-zinc-800 bg-zinc-900/20 py-16 sm:py-24" aria-label="The Verdict AI field guide">
+    <section className="mb-20 border-y border-zinc-800 bg-zinc-900/20 py-16 sm:py-24" aria-label="The Rate That AI field guide">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-12 max-w-xl">
           <p className="text-base font-black uppercase tracking-[0.16em] text-red-400">Why we&apos;re here</p>

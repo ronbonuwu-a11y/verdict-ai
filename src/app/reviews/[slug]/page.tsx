@@ -1,5 +1,7 @@
 import { VerdictBadge } from "@/components/VerdictBadge";
-import { getAllReviews, getReviewBySlug } from "@/lib/reviews";
+import { ReviewComments } from "@/components/ReviewComments";
+import { getCurrentUser } from "@/lib/auth";
+import { getAllReviews, getCommentsForReview, getReviewBySlug } from "@/lib/reviews";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -31,6 +33,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   const review = getReviewBySlug(slug);
 
   if (!review) notFound();
+  const [comments, user] = await Promise.all([getCommentsForReview(review.slug), getCurrentUser()]);
 
   const testedDate = new Date(review.testedAt).toLocaleDateString("en-US", {
     month: "long",
@@ -115,6 +118,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           </ul>
         </section>
       )}
+
+      <ReviewComments slug={review.slug} initialComments={comments} canComment={Boolean(user)} />
 
       {review.instagramUrl && (
         <a

@@ -84,6 +84,12 @@ export async function getCurrentUser() {
   return userFromToken((await cookies()).get(SESSION_COOKIE)?.value);
 }
 
+export async function getRequestUser(request: Request) {
+  const cookie = request.headers.get("cookie") ?? "";
+  const token = cookie.split(";").map((item) => item.trim()).find((item) => item.startsWith(`${SESSION_COOKIE}=`))?.slice(SESSION_COOKIE.length + 1);
+  return userFromToken(token);
+}
+
 export function sessionCookie(value: string, expiresAt: string) {
   return { name: SESSION_COOKIE, value, httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax" as const, path: "/", expires: new Date(expiresAt), priority: "high" as const };
 }

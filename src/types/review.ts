@@ -38,6 +38,14 @@ export interface Nomination {
   upvotes: number;
 }
 
+export interface ReviewComment {
+  id: string;
+  reviewSlug: string;
+  userId: string;
+  body: string;
+  createdAt: string;
+}
+
 export interface EmailSubscriber {
   id: string;
   email: string;

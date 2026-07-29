@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Nominate a Tool",
-  description: "Suggest an AI tool for Verdict AI to test against its marketing claims.",
+  description: "Suggest an AI tool for Rate That AI to test against its marketing claims.",
 };
 
 export default function SubmitPage() {

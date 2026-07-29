@@ -16,11 +16,11 @@ export async function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="group flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-sm font-black text-white">
-            VA
+            RTA
           </span>
           <div>
             <p className="text-lg font-bold tracking-tight text-white group-hover:text-red-400">
-              Verdict AI
+              Rate That AI
             </p>
             <p className="text-xs text-zinc-400">
               We test AI tools so you know what&apos;s worth it

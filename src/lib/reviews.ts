@@ -8,6 +8,7 @@ import type {
   EmailSubscriber,
   NewsletterIssue,
   Nomination,
+  ReviewComment,
   Review,
   Verdict,
 } from "@/types/review";
@@ -18,6 +19,7 @@ const NOMINATIONS_FILE = path.join(DATA_DIR, "nominations.json");
 const SUBSCRIBERS_FILE = path.join(DATA_DIR, "subscribers.json");
 const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter-issues.json");
 const AGENCY_FILE = path.join(DATA_DIR, "agency-inquiries.json");
+const COMMENTS_FILE = path.join(DATA_DIR, "comments.json");
 
 const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-jasper": 6.0,
@@ -147,6 +149,18 @@ export async function addNomination(
   nominations.push(entry);
   await writeJsonFile(NOMINATIONS_FILE, nominations);
   return entry;
+}
+
+export async function getCommentsForReview(reviewSlug: string): Promise<ReviewComment[]> {
+  const comments = await readJsonFile<ReviewComment>(COMMENTS_FILE);
+  return comments.filter((comment) => comment.reviewSlug === reviewSlug).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+}
+
+export async function addReviewComment(input: Omit<ReviewComment, "id" | "createdAt">): Promise<ReviewComment> {
+  const comments = await readJsonFile<ReviewComment>(COMMENTS_FILE);
+  const comment: ReviewComment = { ...input, id: crypto.randomUUID(), createdAt: new Date().toISOString() };
+  await writeJsonFile(COMMENTS_FILE, [...comments, comment]);
+  return comment;
 }
 
 export async function upvoteNomination(id: string): Promise<Nomination | null> {

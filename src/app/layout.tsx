@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Verdict AI — Independent AI Tool Reviews",
-    template: "%s | Verdict AI",
+    default: "Rate That AI — Independent AI Tool Reviews",
+    template: "%s | Rate That AI",
   },
   description:
     "We test AI tools against their marketing claims and deliver clear verdicts: PASSES, FAILS, or MIXED.",

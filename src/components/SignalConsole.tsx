@@ -68,7 +68,7 @@ export function SignalConsole({ total }: { total: number }) {
             <span className="absolute left-5 top-5 font-mono text-[10px] text-zinc-500">01 / 03</span>
             <span className="absolute bottom-5 right-5 font-mono text-[10px] text-zinc-500">LIVE</span>
           </div>
-          <div className="mt-5" role="tablist" aria-label="Explore the Verdict AI process">
+          <div className="mt-5" role="tablist" aria-label="Explore the Rate That AI process">
             <div className="grid grid-cols-3 gap-2">
               {modes.map((item, index) => (
                 <button key={item.label} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)} className={`rounded-xl px-2 py-3 text-left text-xs font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${active === index ? "bg-white text-zinc-950" : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white"}`}>
