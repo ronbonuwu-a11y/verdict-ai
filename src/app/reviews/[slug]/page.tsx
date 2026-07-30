@@ -10,6 +10,16 @@ interface ReviewPageProps {
   params: Promise<{ slug: string }>;
 }
 
+function whyItMatters(result: string) {
+  const text = result.toLowerCase();
+  if (text.includes("artifact") || text.includes("warped") || text.includes("unreadable")) return "Why it matters: this can make the finished output unusable without manual cleanup, especially when the detail is customer-facing.";
+  if (text.includes("generic") || text.includes("robotic") || text.includes("reused")) return "Why it matters: the output may save a first draft, but it still needs editing before it sounds specific or human.";
+  if (text.includes("missed") || text.includes("ignored") || text.includes("failed") || text.includes("confused")) return "Why it matters: this is a reliability limit—do not depend on the tool for this task without checking its work.";
+  if (text.includes("worked") || text.includes("clear") || text.includes("correct") || text.includes("never")) return "Why it matters: this is evidence that the tool can handle this part of the job consistently under the stated test conditions.";
+  if (text.includes("fast") || text.includes("easy") || text.includes("under five")) return "Why it matters: this lowers the effort needed to get value from the tool, but it does not by itself prove output quality.";
+  return "Why it matters: this was observed in the stated test. Use the methodology above to understand the conditions before generalizing it.";
+}
+
 export async function generateStaticParams() {
   return getAllReviews().map((review) => ({ slug: review.slug }));
 }
@@ -85,7 +95,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-4 text-xl font-bold text-white">Results</h2>
+        <h2 className="mb-2 text-xl font-bold text-white">What happened in the test</h2>
+        <p className="mb-4 text-sm text-zinc-400">Each finding explains the practical consequence, not just the technical observation.</p>
         <ul className="space-y-3">
           {review.results.map((result, i) => (
             <li
@@ -95,7 +106,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
               <span className="mt-0.5 font-mono text-xs text-zinc-600">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              {result}
+              <div><p className="font-medium text-zinc-100">{result}</p><p className="mt-1 text-sm leading-relaxed text-zinc-400">{whyItMatters(result)}</p></div>
             </li>
           ))}
         </ul>
@@ -120,6 +131,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       )}
 
       <ReviewComments slug={review.slug} initialComments={comments} canComment={Boolean(user)} />
+
+      <p className="mb-10 rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 text-sm leading-relaxed text-zinc-400">Think this rating misses important evidence? <Link href="/rerate" className="font-semibold text-white underline decoration-red-500 underline-offset-4">Request a re-rate</Link> with product updates, test access, and verifiable supporting material.</p>
 
       {review.instagramUrl && (
         <a

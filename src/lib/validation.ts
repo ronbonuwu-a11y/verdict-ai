@@ -33,6 +33,15 @@ export const commentSchema = z.object({
   website: z.string().max(0).optional(),
 }).strict();
 
+export const rerateSchema = z.object({
+  company: z.string().trim().min(2, "Company name is required.").max(120),
+  email: z.string().trim().toLowerCase().max(254).email("Enter a valid email address."),
+  toolName: z.string().trim().min(2, "Tool name is required.").max(120),
+  reviewUrl: z.union([z.literal(""), safeUrl]).optional(),
+  evidence: z.string().trim().min(50, "Please provide at least 50 characters of evidence.").max(4000, "Evidence is too long."),
+  website: z.string().max(0).optional(),
+}).strict();
+
 export type SubscribeInput = z.infer<typeof subscribeSchema>;
 export type NominationInput = z.infer<typeof nominationSchema>;
 export type CredentialsInput = z.infer<typeof credentialsSchema>;

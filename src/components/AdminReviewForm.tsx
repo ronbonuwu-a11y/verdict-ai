@@ -11,7 +11,7 @@ const CATEGORIES: Category[] = [
   "Other",
 ];
 
-const VERDICTS: Verdict[] = ["PASSES", "FAILS", "MIXED", "QUALIFIED PASS"];
+const VERDICTS: Verdict[] = ["SLOP", "MIXED", "PASSABLE", "APPROVED"];
 
 interface AdminReviewFormProps {
   existingReview?: Review;
@@ -24,7 +24,7 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
     existingReview?.category ?? "Writing Tools",
   );
   const [verdict, setVerdict] = useState<Verdict>(
-    existingReview?.verdict ?? "FAILS",
+    existingReview?.verdict ?? "MIXED",
   );
   const [score, setScore] = useState(existingReview?.score?.toString() ?? "5.0");
   const [claim, setClaim] = useState(existingReview?.claim ?? "");
@@ -167,7 +167,7 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
         rows={5}
       />
       <Field label="Instagram Reel URL" value={instagramUrl} onChange={setInstagramUrl} />
-      <Field label="Affiliate URL (PASSES only)" value={affiliateUrl} onChange={setAffiliateUrl} />
+      <Field label="Affiliate URL (APPROVED only)" value={affiliateUrl} onChange={setAffiliateUrl} />
       <TextArea
         label="Extended breakdown (members-only)"
         value={extendedBreakdown}

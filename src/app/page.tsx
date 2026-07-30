@@ -10,9 +10,9 @@ export default function HomePage() {
   const reviews = getAllReviews();
   const categories = getCategories();
 
-  const passCount = reviews.filter((r) => r.verdict === "PASSES").length;
-  const failCount = reviews.filter((r) => r.verdict === "FAILS").length;
-  const actuallyGood = reviews.filter((r) => r.verdict === "PASSES").slice(0, 3);
+  const approvedCount = reviews.filter((r) => r.verdict === "APPROVED").length;
+  const slopCount = reviews.filter((r) => r.verdict === "SLOP").length;
+  const actuallyGood = reviews.filter((r) => r.verdict === "APPROVED").slice(0, 3);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -27,12 +27,12 @@ export default function HomePage() {
             <p className="text-xs text-zinc-500">Tools tested</p>
           </div>
           <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-3">
-            <p className="text-2xl font-bold text-emerald-400">{passCount}</p>
-            <p className="text-xs text-zinc-500">Pass</p>
+            <p className="text-2xl font-bold text-emerald-400">{approvedCount}</p>
+            <p className="text-xs text-zinc-500">Approved</p>
           </div>
           <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-5 py-3">
-            <p className="text-2xl font-bold text-red-400">{failCount}</p>
-            <p className="text-xs text-zinc-500">Fail</p>
+            <p className="text-2xl font-bold text-red-400">{slopCount}</p>
+            <p className="text-xs text-zinc-500">Slop</p>
           </div>
         </div>
       </section>

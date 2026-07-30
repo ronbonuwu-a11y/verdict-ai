@@ -18,11 +18,6 @@ export function ReviewCard({ review }: ReviewCardProps) {
           <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
             {review.category}
           </p>
-          {review.reviewStage && (
-            <p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-amber-400">
-              Hands-on test pending
-            </p>
-          )}
           <h3 className="mt-1 text-lg font-semibold text-white group-hover:text-red-400">
             {review.toolName}
           </h3>
@@ -49,7 +44,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
             year: "numeric",
           })}
         </p>
-        {review.affiliateUrl && review.verdict === "PASSES" && (
+        {review.affiliateUrl && review.verdict === "APPROVED" && (
           <span className="text-[10px] font-medium uppercase tracking-wide text-emerald-600">
             Affiliate
           </span>

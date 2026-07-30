@@ -66,10 +66,10 @@ export function ReviewSearch({ reviews, categories }: ReviewSearchProps) {
           className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-white focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
         >
           <option value="">All verdicts</option>
-          <option value="PASSES">Passes</option>
-          <option value="FAILS">Fails</option>
+          <option value="APPROVED">Approved</option>
+          <option value="SLOP">Slop</option>
           <option value="MIXED">Mixed</option>
-          <option value="QUALIFIED PASS">Qualified Pass</option>
+          <option value="PASSABLE">Passable</option>
         </select>
       </div>
 

@@ -10,6 +10,7 @@ import type {
   Nomination,
   ReviewComment,
   Review,
+  RerateRequest,
   Verdict,
 } from "@/types/review";
 
@@ -20,6 +21,7 @@ const SUBSCRIBERS_FILE = path.join(DATA_DIR, "subscribers.json");
 const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter-issues.json");
 const AGENCY_FILE = path.join(DATA_DIR, "agency-inquiries.json");
 const COMMENTS_FILE = path.join(DATA_DIR, "comments.json");
+const RERATE_FILE = path.join(DATA_DIR, "rerate-requests.json");
 
 const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-jasper": 6.0,
@@ -30,6 +32,13 @@ const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-surfer": 5.7,
   "research-clearscope": 6.5,
 };
+
+export function verdictFromScore(score: number): Verdict {
+  if (score <= 2.5) return "SLOP";
+  if (score <= 5) return "MIXED";
+  if (score <= 7.5) return "PASSABLE";
+  return "APPROVED";
+}
 
 function readJsonSync<T>(filePath: string, fallback: T): T {
   try {
@@ -56,9 +65,8 @@ export function getAllReviews(): Review[] {
   const reviews = readJsonSync<Array<Omit<Review, "verdict" | "score"> & { verdict: string; score?: number }>>(REVIEWS_FILE, []);
   return reviews.map((review) => ({
     ...review,
-    verdict: review.verdict === "BARELY PASSES" ? "QUALIFIED PASS" : review.verdict as Verdict,
     score: Number.isFinite(review.score) ? review.score! : RESEARCH_BRIEF_SCORES[review.id] ?? 5.0,
-  }));
+  })).map((review) => ({ ...review, verdict: verdictFromScore(review.score) }));
 }
 
 export function getReviewBySlug(slug: string): Review | undefined {
@@ -74,7 +82,7 @@ export function getReviewsByVerdict(verdict: Verdict): Review[] {
 }
 
 export function getActuallyGoodReviews(): Review[] {
-  return getAllReviews().filter((review) => review.verdict === "PASSES");
+  return getAllReviews().filter((review) => review.verdict === "APPROVED");
 }
 
 export function getFeaturedNewsletterReviews(): Review[] {
@@ -121,10 +129,10 @@ export function getReviewStats() {
   const reviews = getAllReviews();
   return {
     total: reviews.length,
-    passes: reviews.filter((r) => r.verdict === "PASSES").length,
-    fails: reviews.filter((r) => r.verdict === "FAILS").length,
+    approved: reviews.filter((r) => r.verdict === "APPROVED").length,
+    slop: reviews.filter((r) => r.verdict === "SLOP").length,
     mixed: reviews.filter((r) => r.verdict === "MIXED").length,
-    qualifiedPasses: reviews.filter((r) => r.verdict === "QUALIFIED PASS").length,
+    passable: reviews.filter((r) => r.verdict === "PASSABLE").length,
   };
 }
 
@@ -161,6 +169,13 @@ export async function addReviewComment(input: Omit<ReviewComment, "id" | "create
   const comment: ReviewComment = { ...input, id: crypto.randomUUID(), createdAt: new Date().toISOString() };
   await writeJsonFile(COMMENTS_FILE, [...comments, comment]);
   return comment;
+}
+
+export async function addRerateRequest(input: Omit<RerateRequest, "id" | "submittedAt">): Promise<RerateRequest> {
+  const requests = await readJsonFile<RerateRequest>(RERATE_FILE);
+  const request: RerateRequest = { ...input, id: crypto.randomUUID(), submittedAt: new Date().toISOString() };
+  await writeJsonFile(RERATE_FILE, [...requests, request]);
+  return request;
 }
 
 export async function upvoteNomination(id: string): Promise<Nomination | null> {

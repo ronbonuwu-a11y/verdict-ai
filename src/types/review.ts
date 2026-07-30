@@ -1,4 +1,4 @@
-export type Verdict = "PASSES" | "FAILS" | "MIXED" | "QUALIFIED PASS";
+export type Verdict = "SLOP" | "MIXED" | "PASSABLE" | "APPROVED";
 
 export type Category =
   | "Writing Tools"
@@ -44,6 +44,16 @@ export interface ReviewComment {
   userId: string;
   body: string;
   createdAt: string;
+}
+
+export interface RerateRequest {
+  id: string;
+  company: string;
+  email: string;
+  toolName: string;
+  reviewUrl?: string;
+  evidence: string;
+  submittedAt: string;
 }
 
 export interface EmailSubscriber {

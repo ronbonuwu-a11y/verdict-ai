@@ -8,6 +8,7 @@ export function Footer() {
         <div className="flex gap-4">
           <Link className="transition hover:text-white" href="/methodology">Methodology</Link>
           <Link className="transition hover:text-white" href="/editorial-policy">Editorial policy</Link>
+          <Link className="transition hover:text-white" href="/rerate">Request a re-rate</Link>
         </div>
       </div>
     </footer>
