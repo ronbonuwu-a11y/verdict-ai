@@ -4,14 +4,18 @@ import { FormEvent, useState } from "react";
 import type { Category, Review, Verdict } from "@/types/review";
 
 const CATEGORIES: Category[] = [
-  "Writing Tools",
-  "Image Tools",
+  "Writing & Research",
+  "Marketing & GTM",
+  "Enterprise Automation",
   "Productivity",
-  "Video Tools",
+  "Image Generation & Editing",
+  "Video Editing",
+  "SEO & Discoverability",
+  "Entertainment & Creative",
   "Other",
 ];
 
-const VERDICTS: Verdict[] = ["SLOP", "MIXED", "PASSABLE", "APPROVED"];
+const VERDICTS: Verdict[] = ["SLOP", "FLAWED", "PASSABLE", "APPROVED"];
 
 interface AdminReviewFormProps {
   existingReview?: Review;
@@ -21,10 +25,10 @@ interface AdminReviewFormProps {
 export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProps) {
   const [toolName, setToolName] = useState(existingReview?.toolName ?? "");
   const [category, setCategory] = useState<Category>(
-    existingReview?.category ?? "Writing Tools",
+    existingReview?.category ?? "Writing & Research",
   );
   const [verdict, setVerdict] = useState<Verdict>(
-    existingReview?.verdict ?? "MIXED",
+    existingReview?.verdict ?? "FLAWED",
   );
   const [score, setScore] = useState(existingReview?.score?.toString() ?? "5.0");
   const [claim, setClaim] = useState(existingReview?.claim ?? "");

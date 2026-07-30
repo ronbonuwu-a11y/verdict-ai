@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Rate That AI",
   },
   description:
-    "We test AI tools against their marketing claims and deliver clear ratings: SLOP, MIXED, PASSABLE, or APPROVED.",
+    "We test AI tools against their marketing claims and deliver clear ratings: SLOP, FLAWED, PASSABLE, or APPROVED.",
 };
 
 export default function RootLayout({

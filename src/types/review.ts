@@ -1,10 +1,14 @@
-export type Verdict = "SLOP" | "MIXED" | "PASSABLE" | "APPROVED";
+export type Verdict = "SLOP" | "FLAWED" | "PASSABLE" | "APPROVED";
 
 export type Category =
-  | "Writing Tools"
-  | "Image Tools"
+  | "Writing & Research"
+  | "Marketing & GTM"
+  | "Enterprise Automation"
   | "Productivity"
-  | "Video Tools"
+  | "Image Generation & Editing"
+  | "Video Editing"
+  | "SEO & Discoverability"
+  | "Entertainment & Creative"
   | "Other";
 
 export interface Review {

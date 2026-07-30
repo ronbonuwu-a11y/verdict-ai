@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Rate That AI",
   tagline: "We test AI tools so you know what's actually worth it.",
   description:
-    "Independent AI tool reviews. We test bold marketing claims and deliver clear ratings: SLOP, MIXED, PASSABLE, or APPROVED.",
+    "Independent AI tool reviews. We test bold marketing claims and deliver clear ratings: SLOP, FLAWED, PASSABLE, or APPROVED.",
   instagramUrl: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com",
   instagramHandle: process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "@ratethatai",
   agencyName: "Verdict GEO",

@@ -68,7 +68,7 @@ export function ReviewSearch({ reviews, categories }: ReviewSearchProps) {
           <option value="">All verdicts</option>
           <option value="APPROVED">Approved</option>
           <option value="SLOP">Slop</option>
-          <option value="MIXED">Mixed</option>
+          <option value="FLAWED">Flawed</option>
           <option value="PASSABLE">Passable</option>
         </select>
       </div>

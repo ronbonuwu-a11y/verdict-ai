@@ -10,7 +10,7 @@ const steps = [
   ["01", "Capture the claim", "We test the promise a tool makes publicly, not a vague version of what it might be able to do."],
   ["02", "Build a real-world test", "Each review uses practical scenarios, representative inputs, and the same success criteria across comparable tools."],
   ["03", "Document the results", "We record what worked, what failed, edge cases, and the conditions that could change the outcome."],
-  ["04", "Publish a clear rating", "SLOP (0–2.5), MIXED (2.6–5), PASSABLE (5.1–7.5), or APPROVED (7.6–10) — plus the evidence readers need to decide for themselves."],
+  ["04", "Publish a clear rating", "SLOP (below 3), FLAWED (3–5), PASSABLE (5.1–7.5), or APPROVED (above 7.5) — plus the evidence readers need to decide for themselves."],
 ];
 
 export default function MethodologyPage() {
@@ -33,8 +33,8 @@ export default function MethodologyPage() {
       <section className="mt-12 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
         <h2 className="text-xl font-bold text-white">What the labels mean</h2>
         <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
-          <div><dt className="font-bold text-red-400">SLOP · 0–2.5</dt><dd className="mt-1 text-zinc-400">Does not reliably deliver meaningful value for its central promise.</dd></div>
-          <div><dt className="font-bold text-amber-400">MIXED · 2.6–5</dt><dd className="mt-1 text-zinc-400">Has real strengths, but the tradeoffs are substantial.</dd></div>
+          <div><dt className="font-bold text-red-400">SLOP · below 3</dt><dd className="mt-1 text-zinc-400">Does not reliably deliver meaningful value for its central promise.</dd></div>
+          <div><dt className="font-bold text-amber-400">FLAWED · 3–5</dt><dd className="mt-1 text-zinc-400">Has real strengths, but the tradeoffs are substantial.</dd></div>
           <div><dt className="font-bold text-sky-400">PASSABLE · 5.1–7.5</dt><dd className="mt-1 text-zinc-400">Useful for the right job, with caveats worth knowing.</dd></div>
           <div><dt className="font-bold text-emerald-400">APPROVED · 7.6–10</dt><dd className="mt-1 text-zinc-400">Delivers compelling, repeatable value in the stated test.</dd></div>
         </dl>

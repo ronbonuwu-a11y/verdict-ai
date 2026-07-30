@@ -5,6 +5,7 @@ import { categoryToSlug } from "@/lib/categories";
 import type {
   AgencyInquiry,
   AgencyService,
+  Category,
   EmailSubscriber,
   NewsletterIssue,
   Nomination,
@@ -33,9 +34,25 @@ const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-clearscope": 6.5,
 };
 
+const CATEGORY_BY_TOOL: Record<string, Category> = {
+  "WriteSmart AI": "Writing & Research",
+  PixelForge: "Image Generation & Editing",
+  FocusFlow: "Productivity",
+  ClipGenius: "Video Editing",
+  "NoteWriter Pro": "Writing & Research",
+  "BrandBot AI": "Marketing & GTM",
+  Jasper: "Marketing & GTM",
+  "Copy.ai": "Marketing & GTM",
+  Writer: "Enterprise Automation",
+  Grammarly: "Writing & Research",
+  QuillBot: "Writing & Research",
+  Surfer: "SEO & Discoverability",
+  Clearscope: "SEO & Discoverability",
+};
+
 export function verdictFromScore(score: number): Verdict {
-  if (score <= 2.5) return "SLOP";
-  if (score <= 5) return "MIXED";
+  if (score < 3) return "SLOP";
+  if (score <= 5) return "FLAWED";
   if (score <= 7.5) return "PASSABLE";
   return "APPROVED";
 }
@@ -66,7 +83,7 @@ export function getAllReviews(): Review[] {
   return reviews.map((review) => ({
     ...review,
     score: Number.isFinite(review.score) ? review.score! : RESEARCH_BRIEF_SCORES[review.id] ?? 5.0,
-  })).map((review) => ({ ...review, verdict: verdictFromScore(review.score) }));
+  })).map((review) => ({ ...review, category: CATEGORY_BY_TOOL[review.toolName] ?? review.category as Category, verdict: verdictFromScore(review.score) }));
 }
 
 export function getReviewBySlug(slug: string): Review | undefined {
@@ -131,7 +148,7 @@ export function getReviewStats() {
     total: reviews.length,
     approved: reviews.filter((r) => r.verdict === "APPROVED").length,
     slop: reviews.filter((r) => r.verdict === "SLOP").length,
-    mixed: reviews.filter((r) => r.verdict === "MIXED").length,
+    flawed: reviews.filter((r) => r.verdict === "FLAWED").length,
     passable: reviews.filter((r) => r.verdict === "PASSABLE").length,
   };
 }
