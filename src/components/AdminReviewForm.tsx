@@ -31,6 +31,10 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
     existingReview?.verdict ?? "FLAWED",
   );
   const [score, setScore] = useState(existingReview?.score?.toString() ?? "5.0");
+  const [startingMonthly, setStartingMonthly] = useState(existingReview?.pricing.startingMonthly?.toString() ?? "");
+  const [pricingLabel, setPricingLabel] = useState(existingReview?.pricing.label ?? "");
+  const [pricingDetails, setPricingDetails] = useState(existingReview?.pricing.details ?? "");
+  const [alternativesText, setAlternativesText] = useState(existingReview?.alternatives.join(", ") ?? "");
   const [claim, setClaim] = useState(existingReview?.claim ?? "");
   const [summary, setSummary] = useState(existingReview?.summary ?? "");
   const [methodology, setMethodology] = useState(
@@ -76,6 +80,12 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
       category,
       verdict,
       score: Number(score),
+      pricing: {
+        startingMonthly: startingMonthly ? Number(startingMonthly) : null,
+        label: pricingLabel || "Pricing not verified",
+        details: pricingDetails || "We have not verified public plan pricing for this tool yet.",
+      },
+      alternatives: alternativesText.split(",").map((item) => item.trim()).filter(Boolean),
       claim,
       summary,
       methodology,
@@ -121,6 +131,10 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
         setInstagramUrl("");
         setAffiliateUrl("");
         setExtendedBreakdown("");
+        setStartingMonthly("");
+        setPricingLabel("");
+        setPricingDetails("");
+        setAlternativesText("");
       }
     } catch {
       setStatus("error");
@@ -161,6 +175,12 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
       </div>
 
       <Field label="Marketing claim *" value={claim} onChange={setClaim} required />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Starting price per month (USD)" value={startingMonthly} onChange={setStartingMonthly} type="number" />
+        <Field label="Pricing label" value={pricingLabel} onChange={setPricingLabel} />
+      </div>
+      <TextArea label="Pricing details" value={pricingDetails} onChange={setPricingDetails} rows={2} />
+      <Field label="Alternatives (comma separated)" value={alternativesText} onChange={setAlternativesText} />
       <TextArea label="Verdict summary *" value={summary} onChange={setSummary} required />
       <TextArea label="Methodology *" value={methodology} onChange={setMethodology} required />
       <TextArea

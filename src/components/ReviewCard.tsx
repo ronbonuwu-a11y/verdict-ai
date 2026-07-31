@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { SponsoredBadge } from "@/components/SponsoredBadge";
 import { VerdictBadge } from "@/components/VerdictBadge";
@@ -8,10 +10,19 @@ interface ReviewCardProps {
 }
 
 export function ReviewCard({ review }: ReviewCardProps) {
+  function updateSpotlight(event: React.PointerEvent<HTMLAnchorElement>) {
+    const card = event.currentTarget;
+    const bounds = card.getBoundingClientRect();
+    card.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+    card.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+  }
+
   return (
     <Link
       href={`/reviews/${review.slug}`}
-      className="group flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition hover:border-zinc-600 hover:bg-zinc-900"
+      onPointerMove={updateSpotlight}
+      data-verdict={review.verdict}
+      className="review-spotlight group flex min-h-[250px] flex-col rounded-3xl border-2 bg-zinc-900/50 p-6 transition duration-200 hover:-translate-y-1 hover:bg-zinc-900"
     >
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>

@@ -50,6 +50,27 @@ const CATEGORY_BY_TOOL: Record<string, Category> = {
   Clearscope: "SEO & Discoverability",
 };
 
+const MARKET_DETAILS: Record<string, Pick<Review, "pricing" | "alternatives">> = {
+  "WriteSmart AI": { pricing: { startingMonthly: 12, label: "From $12/month", details: "Starter pricing shown for comparison; feature limits may apply." }, alternatives: ["Jasper", "Copy.ai", "Grammarly"] },
+  PixelForge: { pricing: { startingMonthly: 20, label: "From $20/month", details: "Entry plan used for price comparison." }, alternatives: ["Adobe Firefly", "Canva Magic Studio", "PhotoRoom"] },
+  FocusFlow: { pricing: { startingMonthly: 10, label: "From $10/month", details: "Individual plan used for price comparison." }, alternatives: ["Motion", "Reclaim", "Sunsama"] },
+  ClipGenius: { pricing: { startingMonthly: 19, label: "From $19/month", details: "Entry plan used for price comparison." }, alternatives: ["OpusClip", "Descript", "Captions"] },
+  "NoteWriter Pro": { pricing: { startingMonthly: 15, label: "From $15/month", details: "Individual plan used for price comparison." }, alternatives: ["Otter", "Fireflies", "Fathom"] },
+  "BrandBot AI": { pricing: { startingMonthly: 39, label: "From $39/month", details: "Entry plan used for price comparison." }, alternatives: ["Jasper", "Copy.ai", "Hootsuite OwlyWriter"] },
+  Jasper: { pricing: { startingMonthly: 69, label: "From $69/month per seat", details: "Pro monthly pricing; a 7-day trial is offered. Business pricing is custom." }, alternatives: ["Copy.ai", "Writer", "ChatGPT"] },
+  "Copy.ai": { pricing: { startingMonthly: 29, label: "From $29/month", details: "Chat plan monthly pricing; workflow tiers and enterprise plans cost more." }, alternatives: ["Jasper", "HubSpot", "Clay"] },
+  Writer: { pricing: { startingMonthly: null, label: "Free trial; paid pricing not public", details: "Starter has a 14-day free trial. Paid plan pricing is not publicly listed." }, alternatives: ["Jasper", "Grammarly", "Microsoft Copilot"] },
+  Grammarly: { pricing: { startingMonthly: 12, label: "From $12/month", details: "Pro plan starting price; a free plan and 7-day trial are available." }, alternatives: ["LanguageTool", "QuillBot", "ProWritingAid"] },
+  QuillBot: { pricing: { startingMonthly: 8.33, label: "From $8.33/month", details: "Premium annual-billing equivalent; a free plan is available." }, alternatives: ["Grammarly", "Wordtune", "LanguageTool"] },
+  Surfer: { pricing: { startingMonthly: 59, label: "From $59/month", details: "Starting plan price reported in the review research; check current document limits before buying." }, alternatives: ["Clearscope", "Frase", "NeuronWriter"] },
+  Clearscope: { pricing: { startingMonthly: 129, label: "From $129/month", details: "Essentials monthly plan; 14-day free trial. Additional usage can cost extra." }, alternatives: ["Surfer", "Frase", "MarketMuse"] },
+};
+
+const DEFAULT_MARKET_DETAILS: Pick<Review, "pricing" | "alternatives"> = {
+  pricing: { startingMonthly: null, label: "Pricing not verified", details: "We have not verified public plan pricing for this tool yet." },
+  alternatives: ["No alternatives added yet"],
+};
+
 export function verdictFromScore(score: number): Verdict {
   if (score < 3) return "SLOP";
   if (score <= 5) return "FLAWED";
@@ -83,7 +104,16 @@ export function getAllReviews(): Review[] {
   return reviews.map((review) => ({
     ...review,
     score: Number.isFinite(review.score) ? review.score! : RESEARCH_BRIEF_SCORES[review.id] ?? 5.0,
-  })).map((review) => ({ ...review, category: CATEGORY_BY_TOOL[review.toolName] ?? review.category as Category, verdict: verdictFromScore(review.score) }));
+  })).map((review) => {
+    const defaults = MARKET_DETAILS[review.toolName] ?? DEFAULT_MARKET_DETAILS;
+    return {
+      ...review,
+      category: CATEGORY_BY_TOOL[review.toolName] ?? review.category as Category,
+      verdict: verdictFromScore(review.score),
+      pricing: review.pricing ?? defaults.pricing,
+      alternatives: review.alternatives ?? defaults.alternatives,
+    };
+  });
 }
 
 export function getReviewBySlug(slug: string): Review | undefined {

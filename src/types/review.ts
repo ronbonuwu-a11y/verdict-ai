@@ -1,5 +1,11 @@
 export type Verdict = "SLOP" | "FLAWED" | "PASSABLE" | "APPROVED";
 
+export interface PricingInfo {
+  startingMonthly: number | null;
+  label: string;
+  details: string;
+}
+
 export type Category =
   | "Writing & Research"
   | "Marketing & GTM"
@@ -18,6 +24,8 @@ export interface Review {
   category: Category;
   verdict: Verdict;
   score: number;
+  pricing: PricingInfo;
+  alternatives: string[];
   claim: string;
   summary: string;
   methodology: string;

@@ -1,23 +1,33 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type RefObject } from "react";
 import { ReviewCard } from "@/components/ReviewCard";
 import type { Review } from "@/types/review";
 
 interface ReviewSearchProps {
   reviews: Review[];
   categories: string[];
+  query?: string;
+  onQueryChange?: (query: string) => void;
+  inputRef?: RefObject<HTMLInputElement | null>;
 }
 
-export function ReviewSearch({ reviews, categories }: ReviewSearchProps) {
-  const [query, setQuery] = useState("");
+export function ReviewSearch({ reviews, categories, query: controlledQuery, onQueryChange, inputRef }: ReviewSearchProps) {
+  const [internalQuery, setInternalQuery] = useState("");
   const [category, setCategory] = useState("");
   const [verdict, setVerdict] = useState("");
+  const [sort, setSort] = useState("relevance");
+  const query = controlledQuery ?? internalQuery;
+
+  function setQuery(nextQuery: string) {
+    setInternalQuery(nextQuery);
+    onQueryChange?.(nextQuery);
+  }
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
 
-    return reviews.filter((review) => {
+    const matches = reviews.filter((review) => {
       const matchesCategory = !category || review.category === category;
       const matchesVerdict = !verdict || review.verdict === verdict;
       if (!normalized) return matchesCategory && matchesVerdict;
@@ -36,13 +46,18 @@ export function ReviewSearch({ reviews, categories }: ReviewSearchProps) {
         matchesCategory && matchesVerdict && haystack.includes(normalized)
       );
     });
-  }, [reviews, query, category, verdict]);
+
+    return sort === "price-asc"
+      ? [...matches].sort((a, b) => (a.pricing.startingMonthly ?? Number.POSITIVE_INFINITY) - (b.pricing.startingMonthly ?? Number.POSITIVE_INFINITY))
+      : matches;
+  }, [reviews, query, category, verdict, sort]);
 
   return (
     <div>
       <div className="mb-4 flex flex-col gap-4 sm:flex-row">
         <input
           type="search"
+          ref={inputRef}
           placeholder="Search tools, claims, or verdicts..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -70,6 +85,15 @@ export function ReviewSearch({ reviews, categories }: ReviewSearchProps) {
           <option value="SLOP">Slop</option>
           <option value="FLAWED">Flawed</option>
           <option value="PASSABLE">Passable</option>
+        </select>
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          aria-label="Sort reviews"
+          className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-white focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+        >
+          <option value="relevance">Sort: relevance</option>
+          <option value="price-asc">Price: low to high</option>
         </select>
       </div>
 

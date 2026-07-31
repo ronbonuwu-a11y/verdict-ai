@@ -3,8 +3,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { SignOutButton } from "@/components/SignOutButton";
 
 const navLinks = [
-  { href: "/", label: "Verdicts" },
-  { href: "/methodology", label: "Methodology" },
+  { href: "/database", label: "Database" },
+  { href: "/methodology", label: "Method" },
   { href: "/editorial-policy", label: "Policy" },
   { href: "/submit", label: "Nominate a Tool" },
 ];
@@ -12,17 +12,17 @@ const navLinks = [
 export async function Header() {
   const user = await getCurrentUser();
   return (
-    <header className="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+    <header className="border-b border-gray-300 bg-[#f4f3ed]/78 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="group flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-sm font-black text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-900 text-sm font-black text-white">
             RTA
           </span>
           <div>
-            <p className="text-lg font-bold tracking-tight text-white group-hover:text-red-400">
+            <p className="text-lg font-bold tracking-tight text-gray-900 group-hover:text-gray-600">
               Rate That AI
             </p>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-gray-500">
               We test AI tools so you know what&apos;s worth it
             </p>
           </div>
@@ -33,18 +33,18 @@ export async function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="hidden text-sm font-medium text-zinc-300 transition hover:text-white sm:inline"
+              className="hidden text-sm font-medium text-gray-600 transition hover:text-gray-900 sm:inline"
             >
               {link.label}
             </Link>
           ))}
           {user ? (
             <div className="hidden items-center gap-3 sm:flex">
-              <span className="max-w-32 truncate text-xs text-zinc-500" title={user.email}>{user.email}</span>
+              <span className="max-w-32 truncate text-xs text-gray-500" title={user.email}>{user.email}</span>
               <SignOutButton />
             </div>
           ) : (
-            <Link href="/account" className="text-sm font-medium text-zinc-300 transition hover:text-white">Account</Link>
+            <Link href="/account" className="text-sm font-medium text-gray-600 transition hover:text-gray-900">Account</Link>
           )}
         </nav>
       </div>
