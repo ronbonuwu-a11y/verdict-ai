@@ -16,7 +16,7 @@ const commitments = [
 
 export default function EditorialPolicyPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <div className="white-canvas-page mx-auto max-w-3xl px-4 py-14 sm:px-6">
       <p className="text-base font-black uppercase tracking-[0.16em] text-red-400">Trust is the product</p>
       <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">Our editorial policy.</h1>
       <p className="mt-5 text-lg leading-relaxed text-zinc-400">Rate That AI exists to help people make better decisions about AI tools. That only works if our reviews are independent, transparent, and willing to be corrected.</p>

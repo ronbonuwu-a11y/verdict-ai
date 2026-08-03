@@ -1,3 +1,4 @@
+@import url("https://db.onlinewebfonts.com/c/bb5de19d87c09a95216dc6ccd96e37c6?family=Nimbus+Sans+TW01");
 @import "tailwindcss";
 
 :root {
@@ -5,7 +6,7 @@
   --foreground: #fafafa;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 @theme inline {
   --color-background: var(--background);
@@ -15,10 +16,88 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: linear-gradient(rgb(242 243 238 / .72), rgb(242 243 238 / .76)), url('/images/rate-that-ai-mountain-hero.png') center / cover fixed;
+  color: #111827;
+  font-family: "Nimbus Sans TW01", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+/* Shared light editorial system for every non-landing route. */
+.site-main:not(:has(.landing-page)) {
+  background: linear-gradient(rgb(242 243 238 / .72), rgb(242 243 238 / .76)), url('/images/rate-that-ai-mountain-hero.png') center / cover fixed;
+  color: #111827;
+}
+
+.white-canvas-page { min-height: 100%; }
+
+.site-main:not(:has(.landing-page)) [class*="bg-zinc-"] { background-color: rgb(255 255 255 / .72) !important; }
+.site-main:not(:has(.landing-page)) [class*="text-white"] { color: #111827 !important; }
+.site-main:not(:has(.landing-page)) .text-zinc-100,
+.site-main:not(:has(.landing-page)) .text-zinc-200,
+.site-main:not(:has(.landing-page)) .text-zinc-300,
+.site-main:not(:has(.landing-page)) .text-zinc-400,
+.site-main:not(:has(.landing-page)) .text-zinc-500 { color: #4b5563 !important; }
+.site-main:not(:has(.landing-page)) .border-zinc-800,
+.site-main:not(:has(.landing-page)) .border-zinc-700,
+.site-main:not(:has(.landing-page)) .border-zinc-600 { border-color: #c9c7be !important; }
+.site-main:not(:has(.landing-page)) .bg-red-600,
+.site-main:not(:has(.landing-page)) .bg-red-500 { background-color: #111827 !important; }
+.site-main:not(:has(.landing-page)) .bg-red-600.text-white,
+.site-main:not(:has(.landing-page)) .bg-red-500.text-white { color: white !important; }
+.site-main:not(:has(.landing-page)) .feature-carousel-card [class*="text-white"] { color: white !important; }
+.site-main:not(:has(.landing-page)) input,
+.site-main:not(:has(.landing-page)) textarea,
+.site-main:not(:has(.landing-page)) select { background: rgb(255 255 255 / .88) !important; color: #111827 !important; }
+.site-main:not(:has(.landing-page)) .database-search-button { color: #fff !important; }
+
+/* Move the interface away from soft, app-like pills while preserving functional
+   circular scanner elements inside the interactive hero. */
+.rounded-2xl, .rounded-xl, .rounded-lg, .rounded-full,
+[class*="rounded-["] {
+  border-radius: 0.875rem !important;
+}
+
+.signal-console .signal-orb,
+.signal-console [aria-hidden="true"].rounded-full,
+.field-guide-glow {
+  border-radius: 9999px !important;
+}
+
+/* Stronger, more legible structure across cards, inputs, and sections. */
+.border-zinc-800 { border-color: rgb(82 82 91 / 0.95) !important; }
+.border-zinc-700 { border-color: rgb(113 113 122 / 0.95) !important; }
+.border-zinc-600 { border-color: rgb(161 161 170 / 0.8) !important; }
+
+.review-spotlight {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.review-spotlight::before {
+  background: radial-gradient(360px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgb(239 68 68 / 0.18), transparent 58%);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 180ms ease;
+  z-index: 0;
+}
+
+.review-spotlight > * { position: relative; z-index: 1; }
+
+.review-spotlight:hover::before,
+.review-spotlight:focus-visible::before {
+  opacity: 1;
+}
+
+.review-spotlight[data-verdict="SLOP"] { border-color: rgb(239 68 68 / .72) !important; }
+.review-spotlight[data-verdict="FLAWED"] { border-color: rgb(245 158 11 / .72) !important; }
+.review-spotlight[data-verdict="PASSABLE"] { border-color: rgb(14 165 233 / .72) !important; }
+.review-spotlight[data-verdict="APPROVED"] { border-color: rgb(16 185 129 / .72) !important; }
+.review-spotlight[data-verdict="SLOP"]:hover, .review-spotlight[data-verdict="SLOP"]:focus-visible { border-color: #f87171 !important; box-shadow: 0 0 30px rgb(239 68 68 / .24); }
+.review-spotlight[data-verdict="FLAWED"]:hover, .review-spotlight[data-verdict="FLAWED"]:focus-visible { border-color: #fbbf24 !important; box-shadow: 0 0 30px rgb(245 158 11 / .24); }
+.review-spotlight[data-verdict="PASSABLE"]:hover, .review-spotlight[data-verdict="PASSABLE"]:focus-visible { border-color: #38bdf8 !important; box-shadow: 0 0 30px rgb(14 165 233 / .24); }
+.review-spotlight[data-verdict="APPROVED"]:hover, .review-spotlight[data-verdict="APPROVED"]:focus-visible { border-color: #34d399 !important; box-shadow: 0 0 30px rgb(16 185 129 / .24); }
 
 ::selection { background: #ef4444; color: #fff; }
 
@@ -36,8 +115,27 @@ body {
 .signal-console:has(button[aria-selected="true"]) { box-shadow: inset 0 1px 0 rgb(255 255 255 / .04); }
 
 @keyframes scan { 0%, 100% { transform: translateY(2.5rem); opacity: .1; } 50% { transform: translateY(17rem); opacity: 1; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes fade-down { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(64px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.animate-fade-up { animation: fade-up .9s cubic-bezier(.22,1,.36,1) both; }
+.animate-fade-down { animation: fade-down .7s cubic-bezier(.22,1,.36,1) both; }
+.animate-hero-rise { animation: hero-rise 1.1s cubic-bezier(.22,1,.36,1) both; }
+
+/* A compact, directional page change that feels like a fast rightward drag. */
+::view-transition-old(.page-swipe-right) {
+  animation: page-swipe-out 280ms cubic-bezier(.4, 0, 1, 1) both;
+}
+
+::view-transition-new(.page-swipe-right) {
+  animation: page-swipe-in 420ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes page-swipe-out { to { opacity: 0; filter: blur(4px); transform: translateX(110px) scale(.985); } }
+@keyframes page-swipe-in { from { opacity: 0; filter: blur(8px); transform: translateX(-72px) scale(.985); } to { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  ::view-transition-old(.page-swipe-right), ::view-transition-new(.page-swipe-right) { animation: none; }
 }

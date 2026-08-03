@@ -5,11 +5,13 @@ import { categoryToSlug } from "@/lib/categories";
 import type {
   AgencyInquiry,
   AgencyService,
+  Category,
   EmailSubscriber,
   NewsletterIssue,
   Nomination,
   ReviewComment,
   Review,
+  RerateRequest,
   Verdict,
 } from "@/types/review";
 
@@ -20,6 +22,7 @@ const SUBSCRIBERS_FILE = path.join(DATA_DIR, "subscribers.json");
 const NEWSLETTER_FILE = path.join(DATA_DIR, "newsletter-issues.json");
 const AGENCY_FILE = path.join(DATA_DIR, "agency-inquiries.json");
 const COMMENTS_FILE = path.join(DATA_DIR, "comments.json");
+const RERATE_FILE = path.join(DATA_DIR, "rerate-requests.json");
 
 const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-jasper": 6.0,
@@ -30,6 +33,50 @@ const RESEARCH_BRIEF_SCORES: Record<string, number> = {
   "research-surfer": 5.7,
   "research-clearscope": 6.5,
 };
+
+const CATEGORY_BY_TOOL: Record<string, Category> = {
+  "WriteSmart AI": "Writing & Research",
+  PixelForge: "Image Generation & Editing",
+  FocusFlow: "Productivity",
+  ClipGenius: "Video Editing",
+  "NoteWriter Pro": "Writing & Research",
+  "BrandBot AI": "Marketing & GTM",
+  Jasper: "Marketing & GTM",
+  "Copy.ai": "Marketing & GTM",
+  Writer: "Enterprise Automation",
+  Grammarly: "Writing & Research",
+  QuillBot: "Writing & Research",
+  Surfer: "SEO & Discoverability",
+  Clearscope: "SEO & Discoverability",
+};
+
+const MARKET_DETAILS: Record<string, Pick<Review, "pricing" | "alternatives">> = {
+  "WriteSmart AI": { pricing: { startingMonthly: 12, label: "From $12/month", details: "Starter pricing shown for comparison; feature limits may apply." }, alternatives: ["Jasper", "Copy.ai", "Grammarly"] },
+  PixelForge: { pricing: { startingMonthly: 20, label: "From $20/month", details: "Entry plan used for price comparison." }, alternatives: ["Adobe Firefly", "Canva Magic Studio", "PhotoRoom"] },
+  FocusFlow: { pricing: { startingMonthly: 10, label: "From $10/month", details: "Individual plan used for price comparison." }, alternatives: ["Motion", "Reclaim", "Sunsama"] },
+  ClipGenius: { pricing: { startingMonthly: 19, label: "From $19/month", details: "Entry plan used for price comparison." }, alternatives: ["OpusClip", "Descript", "Captions"] },
+  "NoteWriter Pro": { pricing: { startingMonthly: 15, label: "From $15/month", details: "Individual plan used for price comparison." }, alternatives: ["Otter", "Fireflies", "Fathom"] },
+  "BrandBot AI": { pricing: { startingMonthly: 39, label: "From $39/month", details: "Entry plan used for price comparison." }, alternatives: ["Jasper", "Copy.ai", "Hootsuite OwlyWriter"] },
+  Jasper: { pricing: { startingMonthly: 69, label: "From $69/month per seat", details: "Pro monthly pricing; a 7-day trial is offered. Business pricing is custom." }, alternatives: ["Copy.ai", "Writer", "ChatGPT"] },
+  "Copy.ai": { pricing: { startingMonthly: 29, label: "From $29/month", details: "Chat plan monthly pricing; workflow tiers and enterprise plans cost more." }, alternatives: ["Jasper", "HubSpot", "Clay"] },
+  Writer: { pricing: { startingMonthly: null, label: "Free trial; paid pricing not public", details: "Starter has a 14-day free trial. Paid plan pricing is not publicly listed." }, alternatives: ["Jasper", "Grammarly", "Microsoft Copilot"] },
+  Grammarly: { pricing: { startingMonthly: 12, label: "From $12/month", details: "Pro plan starting price; a free plan and 7-day trial are available." }, alternatives: ["LanguageTool", "QuillBot", "ProWritingAid"] },
+  QuillBot: { pricing: { startingMonthly: 8.33, label: "From $8.33/month", details: "Premium annual-billing equivalent; a free plan is available." }, alternatives: ["Grammarly", "Wordtune", "LanguageTool"] },
+  Surfer: { pricing: { startingMonthly: 59, label: "From $59/month", details: "Starting plan price reported in the review research; check current document limits before buying." }, alternatives: ["Clearscope", "Frase", "NeuronWriter"] },
+  Clearscope: { pricing: { startingMonthly: 129, label: "From $129/month", details: "Essentials monthly plan; 14-day free trial. Additional usage can cost extra." }, alternatives: ["Surfer", "Frase", "MarketMuse"] },
+};
+
+const DEFAULT_MARKET_DETAILS: Pick<Review, "pricing" | "alternatives"> = {
+  pricing: { startingMonthly: null, label: "Pricing not verified", details: "We have not verified public plan pricing for this tool yet." },
+  alternatives: ["No alternatives added yet"],
+};
+
+export function verdictFromScore(score: number): Verdict {
+  if (score < 3) return "SLOP";
+  if (score <= 5) return "FLAWED";
+  if (score <= 7.5) return "PASSABLE";
+  return "APPROVED";
+}
 
 function readJsonSync<T>(filePath: string, fallback: T): T {
   try {
@@ -56,9 +103,17 @@ export function getAllReviews(): Review[] {
   const reviews = readJsonSync<Array<Omit<Review, "verdict" | "score"> & { verdict: string; score?: number }>>(REVIEWS_FILE, []);
   return reviews.map((review) => ({
     ...review,
-    verdict: review.verdict === "BARELY PASSES" ? "QUALIFIED PASS" : review.verdict as Verdict,
     score: Number.isFinite(review.score) ? review.score! : RESEARCH_BRIEF_SCORES[review.id] ?? 5.0,
-  }));
+  })).map((review) => {
+    const defaults = MARKET_DETAILS[review.toolName] ?? DEFAULT_MARKET_DETAILS;
+    return {
+      ...review,
+      category: CATEGORY_BY_TOOL[review.toolName] ?? review.category as Category,
+      verdict: verdictFromScore(review.score),
+      pricing: review.pricing ?? defaults.pricing,
+      alternatives: review.alternatives ?? defaults.alternatives,
+    };
+  });
 }
 
 export function getReviewBySlug(slug: string): Review | undefined {
@@ -74,7 +129,7 @@ export function getReviewsByVerdict(verdict: Verdict): Review[] {
 }
 
 export function getActuallyGoodReviews(): Review[] {
-  return getAllReviews().filter((review) => review.verdict === "PASSES");
+  return getAllReviews().filter((review) => review.verdict === "APPROVED");
 }
 
 export function getFeaturedNewsletterReviews(): Review[] {
@@ -121,10 +176,10 @@ export function getReviewStats() {
   const reviews = getAllReviews();
   return {
     total: reviews.length,
-    passes: reviews.filter((r) => r.verdict === "PASSES").length,
-    fails: reviews.filter((r) => r.verdict === "FAILS").length,
-    mixed: reviews.filter((r) => r.verdict === "MIXED").length,
-    qualifiedPasses: reviews.filter((r) => r.verdict === "QUALIFIED PASS").length,
+    approved: reviews.filter((r) => r.verdict === "APPROVED").length,
+    slop: reviews.filter((r) => r.verdict === "SLOP").length,
+    flawed: reviews.filter((r) => r.verdict === "FLAWED").length,
+    passable: reviews.filter((r) => r.verdict === "PASSABLE").length,
   };
 }
 
@@ -161,6 +216,13 @@ export async function addReviewComment(input: Omit<ReviewComment, "id" | "create
   const comment: ReviewComment = { ...input, id: crypto.randomUUID(), createdAt: new Date().toISOString() };
   await writeJsonFile(COMMENTS_FILE, [...comments, comment]);
   return comment;
+}
+
+export async function addRerateRequest(input: Omit<RerateRequest, "id" | "submittedAt">): Promise<RerateRequest> {
+  const requests = await readJsonFile<RerateRequest>(RERATE_FILE);
+  const request: RerateRequest = { ...input, id: crypto.randomUUID(), submittedAt: new Date().toISOString() };
+  await writeJsonFile(RERATE_FILE, [...requests, request]);
+  return request;
 }
 
 export async function upvoteNomination(id: string): Promise<Nomination | null> {

@@ -1,10 +1,20 @@
-export type Verdict = "PASSES" | "FAILS" | "MIXED" | "QUALIFIED PASS";
+export type Verdict = "SLOP" | "FLAWED" | "PASSABLE" | "APPROVED";
+
+export interface PricingInfo {
+  startingMonthly: number | null;
+  label: string;
+  details: string;
+}
 
 export type Category =
-  | "Writing Tools"
-  | "Image Tools"
+  | "Writing & Research"
+  | "Marketing & GTM"
+  | "Enterprise Automation"
   | "Productivity"
-  | "Video Tools"
+  | "Image Generation & Editing"
+  | "Video Editing"
+  | "SEO & Discoverability"
+  | "Entertainment & Creative"
   | "Other";
 
 export interface Review {
@@ -14,6 +24,8 @@ export interface Review {
   category: Category;
   verdict: Verdict;
   score: number;
+  pricing: PricingInfo;
+  alternatives: string[];
   claim: string;
   summary: string;
   methodology: string;
@@ -44,6 +56,16 @@ export interface ReviewComment {
   userId: string;
   body: string;
   createdAt: string;
+}
+
+export interface RerateRequest {
+  id: string;
+  company: string;
+  email: string;
+  toolName: string;
+  reviewUrl?: string;
+  evidence: string;
+  submittedAt: string;
 }
 
 export interface EmailSubscriber {

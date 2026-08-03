@@ -4,14 +4,18 @@ import { FormEvent, useState } from "react";
 import type { Category, Review, Verdict } from "@/types/review";
 
 const CATEGORIES: Category[] = [
-  "Writing Tools",
-  "Image Tools",
+  "Writing & Research",
+  "Marketing & GTM",
+  "Enterprise Automation",
   "Productivity",
-  "Video Tools",
+  "Image Generation & Editing",
+  "Video Editing",
+  "SEO & Discoverability",
+  "Entertainment & Creative",
   "Other",
 ];
 
-const VERDICTS: Verdict[] = ["PASSES", "FAILS", "MIXED", "QUALIFIED PASS"];
+const VERDICTS: Verdict[] = ["SLOP", "FLAWED", "PASSABLE", "APPROVED"];
 
 interface AdminReviewFormProps {
   existingReview?: Review;
@@ -21,12 +25,16 @@ interface AdminReviewFormProps {
 export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProps) {
   const [toolName, setToolName] = useState(existingReview?.toolName ?? "");
   const [category, setCategory] = useState<Category>(
-    existingReview?.category ?? "Writing Tools",
+    existingReview?.category ?? "Writing & Research",
   );
   const [verdict, setVerdict] = useState<Verdict>(
-    existingReview?.verdict ?? "FAILS",
+    existingReview?.verdict ?? "FLAWED",
   );
   const [score, setScore] = useState(existingReview?.score?.toString() ?? "5.0");
+  const [startingMonthly, setStartingMonthly] = useState(existingReview?.pricing.startingMonthly?.toString() ?? "");
+  const [pricingLabel, setPricingLabel] = useState(existingReview?.pricing.label ?? "");
+  const [pricingDetails, setPricingDetails] = useState(existingReview?.pricing.details ?? "");
+  const [alternativesText, setAlternativesText] = useState(existingReview?.alternatives.join(", ") ?? "");
   const [claim, setClaim] = useState(existingReview?.claim ?? "");
   const [summary, setSummary] = useState(existingReview?.summary ?? "");
   const [methodology, setMethodology] = useState(
@@ -72,6 +80,12 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
       category,
       verdict,
       score: Number(score),
+      pricing: {
+        startingMonthly: startingMonthly ? Number(startingMonthly) : null,
+        label: pricingLabel || "Pricing not verified",
+        details: pricingDetails || "We have not verified public plan pricing for this tool yet.",
+      },
+      alternatives: alternativesText.split(",").map((item) => item.trim()).filter(Boolean),
       claim,
       summary,
       methodology,
@@ -117,6 +131,10 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
         setInstagramUrl("");
         setAffiliateUrl("");
         setExtendedBreakdown("");
+        setStartingMonthly("");
+        setPricingLabel("");
+        setPricingDetails("");
+        setAlternativesText("");
       }
     } catch {
       setStatus("error");
@@ -157,6 +175,12 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
       </div>
 
       <Field label="Marketing claim *" value={claim} onChange={setClaim} required />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Starting price per month (USD)" value={startingMonthly} onChange={setStartingMonthly} type="number" />
+        <Field label="Pricing label" value={pricingLabel} onChange={setPricingLabel} />
+      </div>
+      <TextArea label="Pricing details" value={pricingDetails} onChange={setPricingDetails} rows={2} />
+      <Field label="Alternatives (comma separated)" value={alternativesText} onChange={setAlternativesText} />
       <TextArea label="Verdict summary *" value={summary} onChange={setSummary} required />
       <TextArea label="Methodology *" value={methodology} onChange={setMethodology} required />
       <TextArea
@@ -167,7 +191,7 @@ export function AdminReviewForm({ existingReview, onSaved }: AdminReviewFormProp
         rows={5}
       />
       <Field label="Instagram Reel URL" value={instagramUrl} onChange={setInstagramUrl} />
-      <Field label="Affiliate URL (PASSES only)" value={affiliateUrl} onChange={setAffiliateUrl} />
+      <Field label="Affiliate URL (APPROVED only)" value={affiliateUrl} onChange={setAffiliateUrl} />
       <TextArea
         label="Extended breakdown (members-only)"
         value={extendedBreakdown}

@@ -37,6 +37,7 @@ yarn-error.log*
 /src/data/users.json
 /src/data/sessions.json
 /src/data/comments.json
+/src/data/rerate-requests.json
 
 # vercel
 .vercel

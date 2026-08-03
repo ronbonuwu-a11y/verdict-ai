@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function SubmitPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
+    <div className="white-canvas-page mx-auto max-w-2xl px-4 py-12 sm:px-6">
         <p className="mb-3 text-base font-black uppercase tracking-[0.16em] text-red-400">
         Community nominations
       </p>

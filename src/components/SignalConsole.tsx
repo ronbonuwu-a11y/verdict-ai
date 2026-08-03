@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import ClickSpark from "@/components/react-bits/ClickSpark";
 
 const modes = [
   {
@@ -36,9 +37,10 @@ export function SignalConsole({ total }: { total: number }) {
 
   return (
     <section className={`signal-console signal-${mode.tint} relative mb-16 overflow-hidden rounded-[2rem] border border-zinc-800 bg-zinc-900/50 px-6 py-8 sm:px-10 sm:py-12`}>
-      <div className="signal-grid absolute inset-0 opacity-50" aria-hidden="true" />
-      <div className="signal-orb absolute -right-20 -top-24 h-72 w-72 rounded-full" aria-hidden="true" />
-      <div className="relative grid items-end gap-10 lg:grid-cols-[1.15fr_.85fr]">
+      <ClickSpark sparkColor="#ef4444" sparkCount={12} sparkRadius={34} sparkSize={12} duration={520}>
+        <div className="signal-grid absolute inset-0 opacity-50" aria-hidden="true" />
+        <div className="signal-orb absolute -right-20 -top-24 h-72 w-72 rounded-full" aria-hidden="true" />
+        <div className="relative grid items-end gap-10 lg:grid-cols-[1.15fr_.85fr]">
         <div>
           <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-zinc-400">
             <span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-50 motion-reduce:hidden" /><span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-current" /></span>
@@ -78,7 +80,8 @@ export function SignalConsole({ total }: { total: number }) {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </ClickSpark>
     </section>
   );
 }
